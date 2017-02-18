@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React  from 'react';
 import {connect} from 'react-redux'
 
 /**
@@ -9,12 +9,24 @@ import {connect} from 'react-redux'
  */
 function ListComponent(props) {
     const listItems = props.users.map((_user) =>
-        <li key={_user.login.md5}>{_user.email}</li>
+        <ListItem key={_user.login.md5} user={_user}/>
     );
 
+    const styles = { 'display' : 'flex',  flexDirection: 'column'}
+
     return (
-        <div >
+        <div style={styles}>
             {listItems}
+        </div>
+    );
+}
+
+function ListItem(props) {
+
+    return (
+        <div style={{'display' : 'flex',flexDirection:'row', padding: 3}}>
+            <img  style={{flex: 0, padding: 5}} src={props.user.picture.thumbnail}></img>
+            <p style={{flex: 1, padding: 5}}>{props.user.email}</p>
         </div>
     );
 }
