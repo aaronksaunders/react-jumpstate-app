@@ -1,5 +1,8 @@
-import { State } from 'jumpstate'
+import {State, Effect, Actions} from 'jumpstate'
 
+/**
+ *
+ */
 export default State({
     // Initial State
     initial: {
@@ -7,9 +10,17 @@ export default State({
     },
     // Actions
     increment (state) {
-        return { count: ++state.count }
+        return {count: ++state.count}
     },
     decrement (state) {
-        return { count: --state.count }
+        return {count: --state.count}
     }
+
+})
+
+
+// Create an asynchronous increment action
+Effect('asyncIncrement', (time = 1000) => {
+    console.log("HELP")
+    setTimeout(() => Actions.increment(), time)
 })

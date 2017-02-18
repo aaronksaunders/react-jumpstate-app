@@ -7,9 +7,11 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { CreateJumpstateMiddleware } from 'jumpstate'
 import CounterState from './state/counter'
+import UsersState from './state/users'
 
 const states = {
-    counter: CounterState
+    counter: CounterState,
+    users : UsersState
 }
 const store = createStore(
     combineReducers(states),
