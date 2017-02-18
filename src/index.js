@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom';
 import  App from './App';
 import './index.css';
 
+
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { CreateJumpstateMiddleware } from 'jumpstate'
 import CounterState from './state/counter'
 import UsersState from './state/users'
+import StuffState from './state/stuff'
+
+
 
 const states = {
     counter: CounterState,
-    users : UsersState
+    users : UsersState,
+    stuff : StuffState
 }
 const store = createStore(
     combineReducers(states),

@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "firebase": "^3.6.9",
     "jumpstate": "^2.2.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

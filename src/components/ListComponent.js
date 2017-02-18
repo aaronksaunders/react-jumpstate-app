@@ -8,11 +8,12 @@ import {connect} from 'react-redux'
  * @constructor
  */
 function ListComponent(props) {
-    const listItems = props.users.map((_user) =>
-        <ListItem key={_user.login.md5} user={_user}/>
-    );
-
-    const styles = { 'display' : 'flex',  flexDirection: 'column'}
+    const {users, loading} = props;
+    const styles = {'display': 'flex', flexDirection: 'column'}
+    const listItems = loading ? <p>LOADING...</p>
+        : users.map((_user) =>
+            <ListItem key={_user.login.md5} user={_user}/>
+        );
 
     return (
         <div style={styles}>
@@ -21,18 +22,34 @@ function ListComponent(props) {
     );
 }
 
+/**
+ *
+ * @param props
+ * @returns {XML}
+ * @constructor
+ */
 function ListItem(props) {
+    const {user} = props;
+    const styles = {
+        container: {'display': 'flex', flexDirection: 'row', padding: 3},
+        image: {flex: 0, padding: 5},
+        email: {flex: 1, padding: 5}
+    }
+
 
     return (
-        <div style={{'display' : 'flex',flexDirection:'row', padding: 3}}>
-            <img  style={{flex: 0, padding: 5}} src={props.user.picture.thumbnail}></img>
-            <p style={{flex: 1, padding: 5}}>{props.user.email}</p>
+        <div style={styles.container}>
+            <img style={styles.image} src={user.picture.thumbnail}></img>
+            <p style={styles.email}>{user.email}</p>
         </div>
     );
 }
 
 // wrap my component, get the state...
 export default connect(state => {
-    return {users: state.users.users}
+    return {
+        users: state.users.users,
+        loading: state.users.loading
+    }
 })(ListComponent)
 

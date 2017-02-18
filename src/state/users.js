@@ -35,7 +35,7 @@ const loadRandomUsers = Effect('loadRandomUsers', (payload) => {
         .then(Actions.loadRandomUsersSuccess)
         .catch(Actions.loadRandomUsersError)
         .finally(() => Actions.showLoading(false))
-})
+});
 
 
 // POLYFILL
