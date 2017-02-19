@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-
-import {Actions} from 'jumpstate'
-import ListComponent from './components/ListComponent'
+import {browserHistory} from 'react-router'
 
 
 import * as firebase from 'firebase';
 
+import logo from './logo.svg';
 import './App.css';
 
 
@@ -17,15 +16,6 @@ class App extends Component {
 
     constructor(props) {
         super(props)
-         const firebaseConfig = {
-            apiKey: "AIzaSyC7XBiaPpX3tbmsO7oofWsNYK7ZP3fkkzU",
-            authDomain: "new-web-project-45936.firebaseapp.com",
-            databaseURL: "https://new-web-project-45936.firebaseio.com",
-            storageBucket: "new-web-project-45936.appspot.com",
-            messagingSenderId: "882846816313"
-        };
-
-        firebase.initializeApp(firebaseConfig);
     }
 
     componentDidMount() { // check to see if already signed in.
@@ -42,20 +32,39 @@ class App extends Component {
 
 
     render() {
-        const {users, counter} = this.props;
+        const {users} = this.props;
 
         return (
             <div className="App-intro">
+                <div className="App-header">
+                    <img src={logo} className="App-logo" alt="logo"/>
+                </div>
+                <div className="App-intro">
+                    <h3>Sample Application using <a href="">Jumpstate</a> to simplify working with <a
+                        href="https://github.com/reactjs/redux">Redux</a> for state
+                        management in your <a href="https://facebook.github.io/react/">React</a> application</h3>
+                    <ul>
+                        <li>How to use <a href="https://randomuser.me/">randomuser.me</a> to make an async request to
+                            load data
+                        </li>
+                        <li>How to use <a href="">Firebase</a> to make async query and to show how to add items</li>
+                        <li>Simple integration of <a
+                            href="https://github.com/ReactTraining/react-router">react-router</a></li>
+                    </ul>
+                </div>
                 <p>{ users.error ? users.error : ""}</p>
-                <p>{counter.count}</p>
-                <button onClick={ () => Actions.decrement() }>Decrement</button>
-                <button onClick={ () => Actions.increment() }>Increment</button>
-                <button onClick={ () => Actions.loadRandomUsers() }>Load Users</button>
-                <button onClick={ () => Actions.loadFirebaseStuff() }>Load Stuff</button>
-                <button onClick={ () => Actions.addFirebaseStuff() }>Load Stuff</button>
+                <div>
+                    <button className="App-button" onClick={ () => browserHistory.push('/query-users') }>Load Users -
+                        RandomUser.me Example
+                    </button>
+                </div>
+                <div>
+                    <button className="App-button" onClick={ () => browserHistory.push('/query-stuff') }>Load Stuff -
+                        Firebase Query Example
+                    </button>
+                </div>
                 <div>
                 </div>
-                <ListComponent />
             </div>
         );
     }
